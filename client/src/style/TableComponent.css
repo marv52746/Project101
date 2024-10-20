@@ -1,0 +1,22 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+}
+
+.styled-table {
+  border-collapse: collapse; /* Collapse borders */
+  width: 80%; /* Width of the table */
+  margin-top: 20px; /* Space above the table */
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid #ddd; /* Border for table cells */
+  padding: 8px; /* Padding inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+.styled-table th {
+  background-color: #f2f2f2; /* Header background color */
+}

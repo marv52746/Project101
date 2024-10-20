@@ -1,0 +1,24 @@
+/* Sidebar.scss */
+.sidebar {
+  .nav-link {
+    color: #000; // Default link color
+    text-decoration: none;
+    padding: 10px; // Add padding for better clickability
+
+    &.active-link {
+      color: #007bff; // Active link color
+      font-weight: bold; // Make active link bold
+      background-color: rgba(
+        0,
+        123,
+        255,
+        0.1
+      ); // Light background for active link
+      border-left: 4px solid #007bff; // Highlight with a left border
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1); // Hover effect
+    }
+  }
+}
