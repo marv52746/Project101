@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const connect = require("./database/connection");
 const cors = require("cors");
 
-require("dotenv").config({ path: "./config.env" });
+require("dotenv").config({ path: "./.env" });
 const PORT = process.env.PORT || 8080;
 
 // create express instance

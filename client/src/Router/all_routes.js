@@ -9,6 +9,8 @@ export const all_routes = {
   customer_form: "/customers/form",
 
   orders: "/orders",
+  orders_form: "/orders/form",
+
   products: "/products/:category",
   sales: "/sales",
 };

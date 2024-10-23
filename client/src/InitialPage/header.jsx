@@ -1,17 +1,18 @@
-// src/Header.js
 import React from "react";
-import { Link } from "react-router-dom"; // Assuming you're using react-router for navigation
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../core/services/slices/userSlice";
-
-import Notification from "../core/notifications/notification"; // Adjust the path as necessary
+import Notification from "../core/notifications/notification";
 import { showNotification } from "../core/services/slices/notificationSlice";
-
-import logo from "../images/bakerr.png"; // Adjust the path to your logo image
+import logo from "../images/bakerr.png";
+import { setTheme } from "../core/services/slices/themeSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const authState = useSelector((state) => state.user.authState);
   const notification = useSelector((state) => state.notification.isVisible);
+  const themeName = useSelector((state) => state.theme.themeName);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -24,62 +25,46 @@ const Header = () => {
     );
   };
 
+  const toggleTheme = () => {
+    const newTheme = themeName === "dark-theme" ? "light-theme" : "dark-theme";
+    dispatch(setTheme(newTheme));
+  };
+
   return (
-    <header style={headerStyle}>
+    <header className={`header ${themeName}`}>
       {notification && <Notification />}
-
-      <Link to="/">
-        <img
-          src={logo} // Update this with the path to your logo image
-          alt="Brand Logo"
-          style={logoStyle} // Optional: add styles for the logo
-        />
-      </Link>
-      <nav style={navStyle}>
-        {authState && (
-          <>
-            <Link to="/profile" style={linkStyle}>
-              Profile
+      <div className="header-content">
+        <Link to="/" className="logo-link">
+          <img src={logo} alt="Brand Logo" className="logo" />
+        </Link>
+        <nav className="nav">
+          {authState ? (
+            <>
+              <Link to="/profile" className={`link ${themeName}`}>
+                Profile
+              </Link>
+              <Link
+                to="/"
+                className={`link ${themeName}`}
+                onClick={handleLogout}
+              >
+                Logout
+              </Link>
+            </>
+          ) : (
+            <Link to="/signin" className={`link ${themeName}`}>
+              Login
             </Link>
-            <Link to="/" style={linkStyle} onClick={handleLogout}>
-              Logout
-            </Link>
-          </>
-        )}
-
-        {!authState && (
-          <Link to="/signin" style={linkStyle}>
-            Login
-          </Link>
-        )}
-      </nav>
+          )}
+          <button className="theme-toggle" onClick={toggleTheme}>
+            <FontAwesomeIcon
+              icon={themeName === "dark-theme" ? faSun : faMoon}
+            />
+          </button>
+        </nav>
+      </div>
     </header>
   );
-};
-
-// Simple styling for the header and nav
-const headerStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "20px",
-  backgroundColor: "#f4f4f4",
-  borderBottom: "1px solid #ccc",
-};
-
-const navStyle = {
-  display: "flex",
-  gap: "20px",
-};
-
-const linkStyle = {
-  textDecoration: "none",
-  color: "#333",
-};
-
-const logoStyle = {
-  height: "50px", // Adjust as needed
-  width: "auto", // Maintain aspect ratio
 };
 
 export default Header;

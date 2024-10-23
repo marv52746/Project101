@@ -17,6 +17,7 @@ import orderListSlice from "./slices/orderListSlice";
 import saleListSlice from "./slices/saleListSlice";
 import customerSlice from "./slices/customerSlice";
 import productListSlice from "./slices/productListSlice";
+import themeSlice from "./slices/themeSlice";
 
 // Persist configuration
 const persistConfig = {
@@ -36,6 +37,7 @@ const store = configureStore({
     customerList: customerSlice,
     productList: productListSlice,
     notification: notificationReducer,
+    theme: themeSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

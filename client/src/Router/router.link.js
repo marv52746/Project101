@@ -13,6 +13,7 @@ import SalesList from "../modules/sales/SalesList.js";
 import CustomerList from "../modules/customers/CustomerList.js";
 import CustomerForm from "../modules/customers/customerForm.js";
 import ProductList from "../modules/products/ProductList.js";
+import OrderForm from "../modules/orders/OrderForm.js";
 
 const routes = all_routes;
 
@@ -69,6 +70,7 @@ export const authRoute = [
     element: <CustomerForm />,
     route: Route,
   },
+
   {
     id: 4,
     path: routes.products,
@@ -76,6 +78,7 @@ export const authRoute = [
     element: <ProductList />,
     route: Route,
   },
+
   {
     id: 5,
     path: routes.orders,
@@ -85,6 +88,14 @@ export const authRoute = [
   },
   {
     id: 6,
+    path: routes.orders_form,
+    name: "orders_form",
+    element: <OrderForm />,
+    route: Route,
+  },
+
+  {
+    id: 7,
     path: routes.sales,
     name: "sales",
     element: <SalesList />,

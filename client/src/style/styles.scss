@@ -1,0 +1,52 @@
+// Import other SCSS files
+@import "./form";
+@import "./table";
+@import "./header";
+@import "./sidebar";
+@import "./theme"; // Import theme variables
+
+// Global styles can be added here as needed
+body {
+  background-color: $light-background-color; // Default to light theme background
+  color: $text-color; // Default to light theme text color
+  font-family: Arial, sans-serif;
+}
+
+.btn {
+  background-color: $primary-color; // Default to light theme primary color
+  border: none;
+  border-radius: $border-radius;
+  padding: $padding;
+
+  &:hover {
+    background-color: darken($primary-color, 10%); // Adjust for hover
+  }
+}
+
+// Dark theme styles
+.dark-theme {
+  background-color: $dark-background-color; // Use dark theme variables
+  color: $dark-text-color;
+
+  .btn {
+    background-color: $dark-primary-color; // Dark theme button color
+    &:hover {
+      background-color: darken($dark-primary-color, 10%); // Darken on hover
+    }
+  }
+
+  // More dark theme styles...
+}
+
+// Light theme styles
+.light-theme {
+  background-color: $light-background-color; // Light theme variables
+  color: $light-text-color;
+
+  .btn {
+    background-color: $light-primary-color; // Light theme button color
+    &:hover {
+      background-color: darken($light-primary-color, 10%); // Lighten on hover
+    }
+  }
+}

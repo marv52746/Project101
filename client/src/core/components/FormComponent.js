@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const FormComponent = ({ initialData, columns }) => {
+const FormComponent = ({ initialData = [], columns }) => {
   const [formData, setFormData] = useState({});
   const location = useLocation();
 
@@ -32,32 +32,47 @@ const FormComponent = ({ initialData, columns }) => {
     <div className="container mt-4">
       <h2 className="mb-4">{view === "view" ? "View Item" : "Edit Item"}</h2>
       <form onSubmit={handleSubmit} className="form">
-        {columns.map((key) => (
-          <div key={key} className="mb-3">
-            <label className="form-label">
-              {key.charAt(0).toUpperCase() + key.slice(1)}:
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name={key}
-              value={formData[key] || ""}
-              readOnly={view === "view"} // Set readOnly based on view parameter
-              onChange={handleChange}
-            />
-          </div>
-        ))}
+        <div className="row">
+          {columns.map(({ name, label, type, options }) => (
+            <div key={name} className="col-md-6 mb-3">
+              <label className="form-label">{label}</label>
+              {type === "select" ? (
+                <div className="dropdown-container">
+                  <select
+                    className="form-control"
+                    name={name}
+                    value={formData[name] || ""}
+                    readOnly={view === "view"} // Set readOnly based on view parameter
+                    onChange={handleChange}
+                  >
+                    <option value="">Select {label}</option>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="dropdown-icon">▼</span> {/* Dropdown icon */}
+                </div>
+              ) : (
+                <input
+                  type={type}
+                  className="form-control"
+                  name={name}
+                  value={formData[name] || ""}
+                  readOnly={view === "view"} // Set readOnly based on view parameter
+                  onChange={handleChange}
+                />
+              )}
+            </div>
+          ))}
+        </div>
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
     </div>
   );
-};
-
-// Default props
-FormComponent.defaultProps = {
-  initialData: [],
 };
 
 export default FormComponent;

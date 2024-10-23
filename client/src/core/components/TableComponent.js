@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const TableComponent = ({ path, columns, initialData, title }) => {
+const TableComponent = ({
+  path = "",
+  columns = [],
+  initialData = [],
+  title = "Item List",
+}) => {
   const [items, setItems] = useState(initialData || []);
 
   const handleDeleteItem = (index) => {
@@ -59,14 +64,6 @@ const TableComponent = ({ path, columns, initialData, title }) => {
       </table>
     </div>
   );
-};
-
-// Default props
-TableComponent.defaultProps = {
-  columns: [],
-  initialData: [],
-  path: "",
-  title: "Item List", // Default title
 };
 
 export default TableComponent;

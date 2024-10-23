@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../style/Sidebar.scss"; // Import the SCSS file
-
 import {
   faHome,
   faInfoCircle,
@@ -16,8 +14,11 @@ import {
   faBoxOpen,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const themeName = useSelector((state) => state.theme.themeName);
+
   const [openSections, setOpenSections] = useState({
     services: true,
     portfolio: true,
@@ -28,16 +29,8 @@ const Sidebar = () => {
   };
 
   const navItems = [
-    {
-      name: "Dashboard",
-      url: "/",
-      icon: faHome,
-    },
-    {
-      name: "About Us",
-      url: "/about",
-      icon: faInfoCircle,
-    },
+    { name: "Dashboard", url: "/", icon: faHome },
+    { name: "About Us", url: "/about", icon: faInfoCircle },
     {
       name: "Products",
       url: "/products",
@@ -49,44 +42,17 @@ const Sidebar = () => {
         { name: "Cookies", url: "/products/Cookies" },
       ],
     },
-    {
-      name: "Orders",
-      url: "/orders",
-      icon: faShoppingCart,
-    },
-    {
-      name: "Sales",
-      url: "/sales",
-      icon: faChartLine,
-    },
-    {
-      name: "Stocks",
-      url: "/stocks",
-      icon: faBoxOpen,
-    },
-    {
-      name: "Customer Management",
-      url: "/customer",
-      icon: faUser,
-    },
-    {
-      name: "User Management",
-      url: "/users",
-      icon: faUser,
-    },
-    {
-      name: "Contact",
-      url: "/contact",
-      icon: faEnvelope,
-    },
+    { name: "Orders", url: "/orders", icon: faShoppingCart },
+    { name: "Sales", url: "/sales", icon: faChartLine },
+    { name: "Stocks", url: "/stocks", icon: faBoxOpen },
+    { name: "Customer Management", url: "/customer", icon: faUser },
+    { name: "User Management", url: "/users", icon: faUser },
+    { name: "Contact", url: "/contact", icon: faEnvelope },
   ];
 
   return (
     <div className="d-flex">
-      <nav
-        className="sidebar bg-light"
-        style={{ width: "300px", height: "100vh" }}
-      >
+      <nav className={`sidebar ${themeName}`}>
         <ul className="nav flex-column">
           {navItems.map((item, index) => (
             <li className="nav-item" key={index}>
@@ -102,14 +68,13 @@ const Sidebar = () => {
                       style={{ marginRight: "10px" }}
                     />
                     {item.name}
-                    {"  "}
                     <FontAwesomeIcon
                       icon={
                         openSections[item.name.toLowerCase()]
                           ? faChevronUp
                           : faChevronDown
                       }
-                      style={{ marginLeft: "10px", marginRight: "0" }} // Add margin to the left
+                      style={{ marginLeft: "10px" }}
                     />
                   </button>
                   {openSections[item.name.toLowerCase()] && (
@@ -120,9 +85,10 @@ const Sidebar = () => {
                       {item.subcategories.map((subitem, subindex) => (
                         <li className="nav-item" key={subindex}>
                           <NavLink
-                            className="nav-link"
                             to={subitem.url}
-                            activeClassName="active-link"
+                            className={({ isActive }) =>
+                              `nav-link ${isActive ? "active-link" : ""}`
+                            }
                           >
                             {subitem.name}
                           </NavLink>
@@ -133,9 +99,10 @@ const Sidebar = () => {
                 </>
               ) : (
                 <NavLink
-                  className="nav-link"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active-link" : ""}`
+                  }
                   to={item.url}
-                  activeClassName="active-link"
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
