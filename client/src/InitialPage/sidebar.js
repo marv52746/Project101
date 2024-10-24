@@ -1,6 +1,6 @@
 // src/Sidebar.js
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -15,6 +15,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import logo from "../images/bakerr.png";
 
 const Sidebar = () => {
   const themeName = useSelector((state) => state.theme.themeName);
@@ -51,71 +52,72 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="d-flex">
-      <nav className={`sidebar ${themeName}`}>
-        <ul className="nav flex-column">
-          {navItems.map((item, index) => (
-            <li className="nav-item" key={index}>
-              {item.subcategories ? (
-                <>
-                  <button
-                    className="nav-link"
-                    onClick={() => toggleSection(item.name.toLowerCase())}
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    <FontAwesomeIcon
-                      icon={item.icon}
-                      style={{ marginRight: "10px" }}
-                    />
-                    {item.name}
-                    <FontAwesomeIcon
-                      icon={
-                        openSections[item.name.toLowerCase()]
-                          ? faChevronUp
-                          : faChevronDown
-                      }
-                      style={{ marginLeft: "10px" }}
-                    />
-                  </button>
-                  {openSections[item.name.toLowerCase()] && (
-                    <ul
-                      className="nav flex-column"
-                      style={{ marginLeft: "20px" }}
-                    >
-                      {item.subcategories.map((subitem, subindex) => (
-                        <li className="nav-item" key={subindex}>
-                          <NavLink
-                            to={subitem.url}
-                            className={({ isActive }) =>
-                              `nav-link ${isActive ? "active-link" : ""}`
-                            }
-                          >
-                            {subitem.name}
-                          </NavLink>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </>
-              ) : (
-                <NavLink
-                  className={({ isActive }) =>
-                    `nav-link ${isActive ? "active-link" : ""}`
-                  }
-                  to={item.url}
+    <nav className={`sidebar ${themeName}`}>
+      <Link to="/" className="logo-link">
+        <img src={logo} alt="Brand Logo" className="logo" />
+      </Link>
+      <ul className="nav flex-column">
+        {navItems.map((item, index) => (
+          <li className="nav-item" key={index}>
+            {item.subcategories ? (
+              <>
+                <button
+                  className="nav-link"
+                  onClick={() => toggleSection(item.name.toLowerCase())}
+                  style={{ display: "flex", alignItems: "center" }}
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
                     style={{ marginRight: "10px" }}
                   />
                   {item.name}
-                </NavLink>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+                  <FontAwesomeIcon
+                    icon={
+                      openSections[item.name.toLowerCase()]
+                        ? faChevronUp
+                        : faChevronDown
+                    }
+                    style={{ marginLeft: "10px" }}
+                  />
+                </button>
+                {openSections[item.name.toLowerCase()] && (
+                  <ul
+                    className="nav flex-column"
+                    style={{ marginLeft: "20px" }}
+                  >
+                    {item.subcategories.map((subitem, subindex) => (
+                      <li className="nav-item" key={subindex}>
+                        <NavLink
+                          to={subitem.url}
+                          className={({ isActive }) =>
+                            `nav-link ${isActive ? "active-link" : ""}`
+                          }
+                        >
+                          {subitem.name}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </>
+            ) : (
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active-link" : ""}`
+                }
+                to={item.url}
+              >
+                <FontAwesomeIcon
+                  icon={item.icon}
+                  style={{ marginRight: "10px" }}
+                />
+                {item.name}
+              </NavLink>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

@@ -1,7 +1,19 @@
+@import "./theme"; // Import theme variables
+
 .table-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the content horizontally */
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: white;
+
+  .table-title {
+    color: black;
+  }
+
+  &.light-theme {
+    background-color: $light-primary-color;
+  }
 }
 
 .styled-table {

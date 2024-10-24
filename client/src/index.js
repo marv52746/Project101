@@ -9,7 +9,6 @@ import store, { persistor } from "./core/services/store.js";
 import AllRoutes from "./Router/routes.js";
 import { base_path } from "./environment.js";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./style/styles.scss";
 
 const rootElement = document.getElementById("root");

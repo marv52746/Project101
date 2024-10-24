@@ -7,7 +7,7 @@
 
 // Global styles can be added here as needed
 body {
-  background-color: $light-background-color; // Default to light theme background
+  background-color: $light-background-color-all; // Default to light theme background
   color: $text-color; // Default to light theme text color
   font-family: Arial, sans-serif;
 }
@@ -38,15 +38,15 @@ body {
   // More dark theme styles...
 }
 
-// Light theme styles
 .light-theme {
-  background-color: $light-background-color; // Light theme variables
-  color: $light-text-color;
+  color: black;
 
   .btn {
-    background-color: $light-primary-color; // Light theme button color
+    background-color: $light-secondary-color; // Dark theme button color
+    color: #000;
+
     &:hover {
-      background-color: darken($light-primary-color, 10%); // Lighten on hover
+      background-color: darken($light-secondary-color, 10%); // Darken on hover
     }
   }
 }

@@ -14,37 +14,31 @@ const ProtectedRoute = ({ element }) => {
 
 const AllRoutes = () => {
   return (
-    <div>
-      <Header />
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-2">
-            <Sidebar />
-          </div>
-          <div className="col-md-10">
-            <Routes>
-              {/* Public routes */}
-              {publicRoutes.map((route) => (
-                <Route
-                  path={route.path}
-                  element={route.element}
-                  key={route.id}
-                />
-              ))}
+    <div className="container-fluid" style={{ padding: 0, overflow: "hidden" }}>
+      <div className="row">
+        <div className="col-md-2" style={{ padding: 0 }}>
+          <Sidebar />
+        </div>
+        <div className="col-md-10" style={{ padding: 0 }}>
+          <Header />
+          <Routes>
+            {/* Public routes */}
+            {publicRoutes.map((route) => (
+              <Route path={route.path} element={route.element} key={route.id} />
+            ))}
 
-              {/* Authenticated routes */}
-              {authRoute.map((route) => (
-                <Route
-                  path={route.path}
-                  element={<ProtectedRoute element={route.element} />}
-                  key={route.id}
-                />
-              ))}
+            {/* Authenticated routes */}
+            {authRoute.map((route) => (
+              <Route
+                path={route.path}
+                element={<ProtectedRoute element={route.element} />}
+                key={route.id}
+              />
+            ))}
 
-              {/* Redirect for signin route */}
-              <Route path="/signin" element={<Signin />} />
-            </Routes>
-          </div>
+            {/* Redirect for signin route */}
+            <Route path="/signin" element={<Signin />} />
+          </Routes>
         </div>
       </div>
     </div>

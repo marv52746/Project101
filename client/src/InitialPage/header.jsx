@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../core/services/slices/userSlice";
 import Notification from "../core/notifications/notification";
 import { showNotification } from "../core/services/slices/notificationSlice";
-import logo from "../images/bakerr.png";
+// import logo from "../images/bakerr.png";
 import { setTheme } from "../core/services/slices/themeSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
@@ -34,9 +34,9 @@ const Header = () => {
     <header className={`header ${themeName}`}>
       {notification && <Notification />}
       <div className="header-content">
-        <Link to="/" className="logo-link">
+        {/* <Link to="/" className="logo-link">
           <img src={logo} alt="Brand Logo" className="logo" />
-        </Link>
+        </Link> */}
         <nav className="nav">
           {authState ? (
             <>
