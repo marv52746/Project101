@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const TableComponent = ({
@@ -9,6 +10,8 @@ const TableComponent = ({
 }) => {
   const [items, setItems] = useState(initialData || []);
 
+  const themeName = useSelector((state) => state.theme.themeName);
+
   const handleDeleteItem = (index) => {
     const updatedItems = items.filter((_, i) => i !== index);
     setItems(updatedItems);
@@ -16,11 +19,31 @@ const TableComponent = ({
 
   return (
     <div style={{ padding: "1rem" }}>
-      <div className="table-container">
-        <h3 className="table-title mb-3">{title}</h3>
+      <div className={`table-container ${themeName}`}>
+        <div
+          className="mb-3"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginRight: "1rem",
+          }}
+        >
+          <h3
+            className="table-title "
+            style={{
+              margin: "0",
+            }}
+          >
+            {title}
+          </h3>
+          <Link to={`/${path}/form?view=new`}>
+            <button className="btn btn-sm">New</button>
+          </Link>
+        </div>
 
         <table className="table table-striped table-bordered">
-          <thead className="">
+          <thead className="table-head">
             <tr>
               {columns.map((col) => (
                 <th key={col.key}>{col.header}</th>
@@ -45,7 +68,7 @@ const TableComponent = ({
                       </button>
                     </Link>
                     <button
-                      className="btn btn-danger btn-sm"
+                      className="btn btn-sm"
                       onClick={() => handleDeleteItem(index)}
                     >
                       Delete

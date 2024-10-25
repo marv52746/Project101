@@ -14,7 +14,7 @@ const Notification = () => {
       // Automatically hide the notification after 3 seconds
       const timer = setTimeout(() => {
         dispatch(hideNotification());
-      }, 3000);
+      }, 10000);
 
       // Clean up the timer on unmount or when visibility changes
       return () => clearTimeout(timer);

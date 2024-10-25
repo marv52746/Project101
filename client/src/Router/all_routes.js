@@ -11,6 +11,9 @@ export const all_routes = {
   orders: "/orders",
   orders_form: "/orders/form",
 
-  products: "/products/:category",
+  products: "/products",
+  products_category: "/products/:category",
+  products_form: "/products/form/",
+
   sales: "/sales",
 };

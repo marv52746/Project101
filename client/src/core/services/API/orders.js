@@ -7,61 +7,49 @@ import {
   addOrder,
   updateOrder,
   deleteOrder,
-} from "../slices/orderListSlice";
+} from "../slices/orderListSlice"; // Adjust the import path as necessary
 import apiService from "../apiService"; // Importing the centralized API service
 
 // Fetch orders
 export const getOrders = () => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchOrdersRequest()); // Start the loading state
-    try {
-      const response = await apiService.get("orders");
-      dispatch(fetchOrdersSuccess(response.data)); // Dispatch success action
-    } catch (error) {
-      console.error("Error fetching orders:", error);
-      dispatch(fetchOrdersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .get(dispatch, "orders")
+      .then((data) => dispatch(fetchOrdersSuccess(data)))
+      .catch(() => dispatch(fetchOrdersFailure("Failed to fetch orders")));
   };
 };
 
 // Add a new order
 export const createOrder = (orderData) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchOrdersRequest()); // Start the loading state
-    try {
-      const response = await apiService.post("orders", orderData);
-      dispatch(addOrder(response.data)); // Dispatch action to add order
-    } catch (error) {
-      console.error("Error creating order:", error);
-      dispatch(fetchOrdersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .post(dispatch, "orders", orderData)
+      .then((data) => dispatch(addOrder(data)))
+      .catch(() => dispatch(fetchOrdersFailure("Failed to create order")));
   };
 };
 
 // Update an existing order
 export const editOrder = (orderId, orderData) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchOrdersRequest()); // Start the loading state
-    try {
-      const response = await apiService.put(`orders/${orderId}`, orderData);
-      dispatch(updateOrder(response.data)); // Dispatch action to update order
-    } catch (error) {
-      console.error("Error updating order:", error);
-      dispatch(fetchOrdersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .put(dispatch, "orders", orderId, orderData)
+      .then((data) => dispatch(updateOrder(data)))
+      .catch(() => dispatch(fetchOrdersFailure("Failed to update order")));
   };
 };
 
 // Delete an order
 export const removeOrder = (orderId) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchOrdersRequest()); // Start the loading state
-    try {
-      await apiService.delete(`orders/${orderId}`);
-      dispatch(deleteOrder(orderId)); // Dispatch action to delete order
-    } catch (error) {
-      console.error("Error deleting order:", error);
-      dispatch(fetchOrdersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .delete(dispatch, "orders", orderId)
+      .then(() => dispatch(deleteOrder(orderId)))
+      .catch(() => dispatch(fetchOrdersFailure("Failed to delete order")));
   };
 };

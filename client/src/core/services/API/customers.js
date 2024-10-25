@@ -11,59 +11,52 @@ import apiService from "../apiService"; // Adjust the import path as necessary
 
 // Fetch customers
 export const getCustomers = () => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchCustomersRequest()); // Start the loading state
-    try {
-      const response = await apiService.get("customers");
-      dispatch(fetchCustomersSuccess(response.data)); // Dispatch success action
-    } catch (error) {
-      console.error("Error fetching customers:", error);
-      dispatch(fetchCustomersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .get(dispatch, "customers")
+      .then((data) => dispatch(fetchCustomersSuccess(data)))
+      .catch(() =>
+        dispatch(fetchCustomersFailure("Failed to fetch customers"))
+      );
   };
 };
 
 // Add a new customer
 export const createCustomer = (customerData) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchCustomersRequest()); // Start the loading state
-    try {
-      const response = await apiService.post("customers", customerData);
-      dispatch(addCustomer(response.data)); // Dispatch action to add customer
-    } catch (error) {
-      console.error("Error creating customer:", error);
-      dispatch(fetchCustomersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .post(dispatch, "customers", customerData)
+      .then((data) => dispatch(addCustomer(data)))
+      .catch(() =>
+        dispatch(fetchCustomersFailure("Failed to create customer"))
+      );
   };
 };
 
 // Update an existing customer
 export const editCustomer = (customerId, customerData) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchCustomersRequest()); // Start the loading state
-    try {
-      const response = await apiService.put(
-        `customers/${customerId}`,
-        customerData
+    return apiService
+      .put(dispatch, "customers", customerId, customerData)
+      .then((data) => dispatch(updateCustomer(data)))
+      .catch(() =>
+        dispatch(fetchCustomersFailure("Failed to update customer"))
       );
-      dispatch(updateCustomer(response.data)); // Dispatch action to update customer
-    } catch (error) {
-      console.error("Error updating customer:", error);
-      dispatch(fetchCustomersFailure(error.message)); // Dispatch failure action
-    }
   };
 };
 
 // Delete a customer
 export const removeCustomer = (customerId) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchCustomersRequest()); // Start the loading state
-    try {
-      await apiService.delete(`customers/${customerId}`);
-      dispatch(deleteCustomer(customerId)); // Dispatch action to delete customer
-    } catch (error) {
-      console.error("Error deleting customer:", error);
-      dispatch(fetchCustomersFailure(error.message)); // Dispatch failure action
-    }
+    return apiService
+      .delete(dispatch, "customers", customerId)
+      .then(() => dispatch(deleteCustomer(customerId)))
+      .catch(() =>
+        dispatch(fetchCustomersFailure("Failed to delete customer"))
+      );
   };
 };

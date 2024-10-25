@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux"; // Import useDispatch
 
-const FormComponent = ({ initialData = [], columns }) => {
+const FormComponent = ({
+  initialData = [],
+  columns,
+  apiActions,
+  entityName,
+}) => {
   const [formData, setFormData] = useState({});
   const location = useLocation();
+  const dispatch = useDispatch(); // Get the dispatch function
+  const navigate = useNavigate(); // Initialize navigate
 
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
@@ -23,14 +31,29 @@ const FormComponent = ({ initialData = [], columns }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    try {
+      if (view === "new") {
+        await dispatch(apiActions.create(formData)); // Create new entity
+      } else if (view === "edit") {
+        await dispatch(apiActions.update(id, formData)); // Update existing entity
+      }
+      navigate(`/${entityName}`); // Redirect based on entity type
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">{view === "view" ? "View Item" : "Edit Item"}</h2>
+      <h2 className="mb-4">
+        {view === "view"
+          ? "View Item"
+          : view === "edit"
+          ? "Edit Item"
+          : "New Item"}
+      </h2>
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
           {columns.map(({ name, label, type, options }) => (

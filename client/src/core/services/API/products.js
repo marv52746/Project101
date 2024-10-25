@@ -11,59 +11,44 @@ import apiService from "../apiService"; // Adjust the import path as necessary
 
 // Fetch products
 export const getProducts = () => {
-  return async (dispatch) => {
-    dispatch(fetchProductsRequest()); // Start the loading state
-    try {
-      const response = await apiService.get("products");
-      dispatch(fetchProductsSuccess(response.data)); // Dispatch success action
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      dispatch(fetchProductsFailure(error.message)); // Dispatch failure action
-    }
+  return (dispatch) => {
+    dispatch(fetchProductsRequest()); // Start loading state
+    return apiService
+      .get(dispatch, "products")
+      .then((data) => dispatch(fetchProductsSuccess(data)))
+      .catch(() => dispatch(fetchProductsFailure("Failed to fetch products")));
   };
 };
 
 // Add a new product
 export const createProduct = (productData) => {
-  return async (dispatch) => {
-    dispatch(fetchProductsRequest()); // Start the loading state
-    try {
-      const response = await apiService.post("products", productData);
-      dispatch(addProduct(response.data)); // Dispatch action to add product
-    } catch (error) {
-      console.error("Error creating product:", error);
-      dispatch(fetchProductsFailure(error.message)); // Dispatch failure action
-    }
+  return (dispatch) => {
+    dispatch(fetchProductsRequest()); // Start loading state
+    return apiService
+      .post(dispatch, "products", productData)
+      .then((data) => dispatch(addProduct(data)))
+      .catch(() => dispatch(fetchProductsFailure("Failed to create product")));
   };
 };
 
 // Update an existing product
 export const editProduct = (productId, productData) => {
-  return async (dispatch) => {
-    dispatch(fetchProductsRequest()); // Start the loading state
-    try {
-      const response = await apiService.put(
-        `products/${productId}`,
-        productData
-      );
-      dispatch(updateProduct(response.data)); // Dispatch action to update product
-    } catch (error) {
-      console.error("Error updating product:", error);
-      dispatch(fetchProductsFailure(error.message)); // Dispatch failure action
-    }
+  return (dispatch) => {
+    dispatch(fetchProductsRequest()); // Start loading state
+    return apiService
+      .put(dispatch, "products", productId, productData)
+      .then((data) => dispatch(updateProduct(data)))
+      .catch(() => dispatch(fetchProductsFailure("Failed to update product")));
   };
 };
 
 // Delete a product
 export const removeProduct = (productId) => {
-  return async (dispatch) => {
-    dispatch(fetchProductsRequest()); // Start the loading state
-    try {
-      await apiService.delete(`products/${productId}`);
-      dispatch(deleteProduct(productId)); // Dispatch action to delete product
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      dispatch(fetchProductsFailure(error.message)); // Dispatch failure action
-    }
+  return (dispatch) => {
+    dispatch(fetchProductsRequest()); // Start loading state
+    return apiService
+      .delete(dispatch, "products", productId)
+      .then(() => dispatch(deleteProduct(productId)))
+      .catch(() => dispatch(fetchProductsFailure("Failed to delete product")));
   };
 };
