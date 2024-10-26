@@ -2,6 +2,7 @@
 @import "./form";
 @import "./table";
 @import "./header";
+@import "./modal";
 @import "./sidebar";
 @import "./theme"; // Import theme variables
 
@@ -10,6 +11,8 @@ body {
   background-color: $light-background-color-all; // Default to light theme background
   color: $text-color; // Default to light theme text color
   font-family: Arial, sans-serif;
+  height: 100%;
+  margin: 0;
 }
 
 .btn {
@@ -47,6 +50,14 @@ body {
 
     &:hover {
       background-color: darken($light-secondary-color, 10%); // Darken on hover
+    }
+  }
+  .btn-danger {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white;
+
+    &:hover {
+      background-color: darken(#dc3545, 10%); // Darken on hover
     }
   }
 }

@@ -25,17 +25,18 @@ const persistConfig = {
   storage,
 };
 
-// Create a persisted reducer
-const persistedReducer = persistReducer(persistConfig, userReducer);
+// Create a function to dynamically create persisted reducers
+const createPersistedReducer = (reducer) =>
+  persistReducer(persistConfig, reducer);
 
 // Configure the store
 const store = configureStore({
   reducer: {
-    user: persistedReducer,
-    orderList: orderListSlice,
-    saleList: saleListSlice,
-    customerList: customerSlice,
-    productList: productListSlice,
+    user: createPersistedReducer(userReducer),
+    orderList: createPersistedReducer(orderListSlice),
+    saleList: createPersistedReducer(saleListSlice),
+    customerList: createPersistedReducer(customerSlice),
+    productList: createPersistedReducer(productListSlice),
     notification: notificationReducer,
     theme: themeSlice,
   },

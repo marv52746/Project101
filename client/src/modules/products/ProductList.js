@@ -26,12 +26,17 @@ function ProductList() {
     dispatch(getProducts());
   }, [dispatch, category]);
 
+  const transformedItems = products.map((item) => ({
+    ...item,
+    isAvailable: item.isAvailable.toString(),
+  }));
+
   // Filter products based on the category from the URL
   const filteredProducts = category
-    ? products.filter(
+    ? transformedItems.filter(
         (product) => product.category.toLowerCase() === category.toLowerCase()
       )
-    : products;
+    : transformedItems;
 
   return (
     <div>

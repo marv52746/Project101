@@ -108,9 +108,16 @@ export const authRoute = [
     element: <OrderForm />,
     route: Route,
   },
-
   {
     id: 9,
+    path: routes.orders_category,
+    name: "orders_category",
+    element: <OrderList />,
+    route: Route,
+  },
+
+  {
+    id: 10,
     path: routes.sales,
     name: "sales",
     element: <SalesList />,

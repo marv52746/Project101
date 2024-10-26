@@ -21,7 +21,7 @@ const AllRoutes = () => {
         </div>
         <div className="col-md-10" style={{ padding: 0 }}>
           <Header />
-          <Routes>
+          <Routes style={{ flexGrow: 1 }}>
             {/* Public routes */}
             {publicRoutes.map((route) => (
               <Route path={route.path} element={route.element} key={route.id} />

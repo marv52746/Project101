@@ -4,9 +4,9 @@ import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
-  faInfoCircle,
+  // faInfoCircle,
   faShoppingCart,
-  faEnvelope,
+  // faEnvelope,
   faBreadSlice,
   faChevronDown,
   faChevronUp,
@@ -31,24 +31,34 @@ const Sidebar = () => {
 
   const navItems = [
     { name: "Dashboard", url: "/", icon: faHome },
-    { name: "About Us", url: "/about", icon: faInfoCircle },
+    // { name: "About Us", url: "/about", icon: faInfoCircle },
     {
       name: "Products",
       url: "/products",
       icon: faBreadSlice,
       subcategories: [
+        { name: "All", url: "/products" },
         { name: "Breads", url: "/products/Bread" },
         { name: "Pastries", url: "/products/Pastry" },
         { name: "Cakes", url: "/products/Cakes" },
         { name: "Cookies", url: "/products/Cookies" },
       ],
     },
-    { name: "Orders", url: "/orders", icon: faShoppingCart },
+    {
+      name: "Orders",
+      url: "/orders",
+      icon: faShoppingCart,
+      subcategories: [
+        { name: "All", url: "/orders" },
+        { name: "Pending", url: "/orders/pending" },
+        { name: "Completed", url: "/orders/completed" },
+        { name: "Canceled", url: "/orders/canceled" },
+      ],
+    },
     { name: "Sales", url: "/sales", icon: faChartLine },
     { name: "Stocks", url: "/stocks", icon: faBoxOpen },
     { name: "Customer Management", url: "/customer", icon: faUser },
     { name: "User Management", url: "/users", icon: faUser },
-    { name: "Contact", url: "/contact", icon: faEnvelope },
   ];
 
   return (

@@ -18,9 +18,9 @@ function SalesList() {
   // Define columns for the table
   const columns = [
     { key: "customerFullname", header: "Customer Name" },
-    { key: "saleDate", header: "Sale Date" },
-    { key: "totalAmount", header: "Total Amount" },
+    { key: "saleDate", header: "Date Sold" },
     { key: "products", header: "Number of Products" },
+    { key: "totalAmount", header: "Total Amount" },
   ];
 
   // Fetch sales when the component mounts
@@ -38,6 +38,9 @@ function SalesList() {
           columns={columns}
           initialData={transformedSales} // Use transformed data directly
           title="Sales"
+          showDelete={false}
+          showEdit={false}
+          showNewButton={false}
         />
       )}
     </div>

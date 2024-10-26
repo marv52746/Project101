@@ -10,6 +10,7 @@ export const all_routes = {
 
   orders: "/orders",
   orders_form: "/orders/form",
+  orders_category: "/orders/:category",
 
   products: "/products",
   products_category: "/products/:category",
