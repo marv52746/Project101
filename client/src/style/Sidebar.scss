@@ -1,10 +1,14 @@
-// Sidebar.scss
-@import "./theme"; // Import theme variables
+@use "sass:color"; // Import the color module
+@use "./theme" as *; // Import theme variables with a namespace
+@use "./mixins" as *; // Import mixins with a namespace
 
 .sidebar {
-  // width: 300px;
+  // width: 300px; // Uncomment if needed
   height: 100vh;
   padding: 1rem;
+  overflow: auto;
+
+  @include slim-scrollbar; // Apply the slim scrollbar styles
 
   .logo-link {
     display: flex;
@@ -25,7 +29,7 @@
       color: $dark-text-color;
 
       &:hover {
-        background-color: darken($dark-background-color, 10%);
+        background-color: color.scale($dark-background-color, $lightness: -13%);
       }
 
       &.active-link {
@@ -42,7 +46,7 @@
       color: $light-text-color;
 
       &:hover {
-        color: lighten($light-background-color, 10%);
+        color: color.scale($light-background-color, $lightness: 13%);
       }
 
       &.active-link {

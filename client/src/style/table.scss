@@ -1,4 +1,4 @@
-@import "./theme"; // Import theme variables
+@use "./theme" as *; // Import theme variables
 
 .table-container {
   display: flex;
@@ -10,6 +10,20 @@
   .table-wrapper {
     flex-grow: 1; // Allow the wrapper to take remaining space
     overflow-y: auto; // Enable scrolling for overflowing content
+    max-height: calc(86vh - 100px); // Adjust height based on your header size
+    position: relative; // Necessary for absolute positioning of the table header
+  }
+
+  .table {
+    width: 100%;
+    table-layout: fixed; // Optional, for equal column widths
+  }
+
+  .table-head {
+    position: sticky; // Stick header to the top
+    top: 0;
+    background-color: inherit; // Ensure background color is inherited
+    z-index: 1; // Ensure header is above the body
   }
 
   .table-title {
@@ -21,7 +35,7 @@
 
     .table-head {
       th {
-        background-color: $light-secondary-color;
+        background-color: $light-secondary-color; // Use variable from theme
       }
     }
   }

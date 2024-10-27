@@ -10,6 +10,25 @@ const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleCredentialResponse = (response) => {
+    const userObject = jwtDecode(response.credential); // Decode JWT if needed
+    const token = response.credential; // This is the JWT token
+
+    // Dispatch action to store user data in Redux and session storage
+    dispatch(loggedUserData({ ...userObject, token }));
+
+    dispatch(
+      showNotification({
+        message: "Login Successfully!",
+        type: "success",
+      })
+    );
+
+    if (token) {
+      navigate("/");
+    }
+  };
+
   useEffect(() => {
     const loadGoogleScript = () => {
       const script = document.createElement("script");
@@ -30,26 +49,7 @@ const Signin = () => {
     };
 
     loadGoogleScript();
-  }, []);
-
-  const handleCredentialResponse = (response) => {
-    const userObject = jwtDecode(response.credential); // Decode JWT if needed
-    const token = response.credential; // This is the JWT token
-
-    // Dispatch action to store user data in Redux and session storage
-    dispatch(loggedUserData({ ...userObject, token }));
-
-    dispatch(
-      showNotification({
-        message: "Login Successfully!",
-        type: "success",
-      })
-    );
-
-    if (token) {
-      navigate("/");
-    }
-  };
+  });
 
   return (
     <div

@@ -15,7 +15,6 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import logo from "../images/bakerr.png";
 
 const Sidebar = () => {
   const themeName = useSelector((state) => state.theme.themeName);
@@ -64,7 +63,11 @@ const Sidebar = () => {
   return (
     <nav className={`sidebar ${themeName}`}>
       <Link to="/" className="logo-link">
-        <img src={logo} alt="Brand Logo" className="logo" />
+        <img
+          src="assets/img/logo-white.png"
+          alt="Brand Logo"
+          className="logo"
+        />
       </Link>
       <ul className="nav flex-column">
         {navItems.map((item, index) => (

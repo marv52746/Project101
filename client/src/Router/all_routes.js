@@ -4,6 +4,7 @@ export const all_routes = {
   profile: "/profile",
   contact: "/contact",
   singin: "/signin",
+  singinTwo: "/signinTwo",
 
   customer: "/customer",
   customer_form: "/customers/form",

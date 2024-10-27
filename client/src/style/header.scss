@@ -1,10 +1,11 @@
-@import "./theme"; // Import theme variables
+@use "./theme" as *; // Import theme variables
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 0 15px;
+  border-bottom: 1px solid #dbe0e6;
 
   .header-content {
     display: flex;
@@ -38,13 +39,13 @@
   }
 
   &.light-theme {
-    background-color: #ffff;
-    color: #000000;
+    background-color: #ffffff; // Use full hex for clarity
+    color: #000;
 
     .nav {
       .link {
         text-decoration: none;
-        background-color: #ffff;
+        background-color: #ffffff; // Use full hex for clarity
         color: inherit;
         padding: 10px 15px;
 

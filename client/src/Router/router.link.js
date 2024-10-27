@@ -15,17 +15,11 @@ import CustomerForm from "../modules/customers/customerForm.js";
 import ProductList from "../modules/products/ProductList.js";
 import OrderForm from "../modules/orders/OrderForm.js";
 import ProductForm from "../modules/products/ProductForm.js";
+// import SigninTwo from "../InitialPage/signinTwo.js";
 
 const routes = all_routes;
 
 export const publicRoutes = [
-  {
-    id: 1,
-    path: routes.dashboard,
-    name: "home",
-    element: <Home />,
-    route: Route,
-  },
   {
     id: 2,
     path: routes.signin,
@@ -49,78 +43,40 @@ export const publicRoutes = [
   },
 ];
 
-export const authRoute = [
+const routesArray = [
+  { path: routes.dashboard, name: "home", element: <Home /> },
+  { path: routes.profile, name: "profile", element: <Profile /> },
+  { path: routes.customer, name: "customer", element: <CustomerList /> },
   {
-    id: 1,
-    path: routes.profile,
-    name: "profile",
-    element: <Profile />,
-    route: Route,
-  },
-  {
-    id: 2,
-    path: routes.customer,
-    name: "customer",
-    element: <CustomerList />,
-    route: Route,
-  },
-  {
-    id: 3,
     path: routes.customer_form,
     name: "customer_form",
     element: <CustomerForm />,
-    route: Route,
   },
-
+  { path: routes.products, name: "products", element: <ProductList /> },
   {
-    id: 4,
-    path: routes.products,
-    name: "products",
-    element: <ProductList />,
-    route: Route,
-  },
-  {
-    id: 5,
     path: routes.products_category,
-    name: "products",
+    name: "products_category",
     element: <ProductList />,
-    route: Route,
   },
   {
-    id: 6,
     path: routes.products_form,
     name: "products_form",
     element: <ProductForm />,
-    route: Route,
   },
-
+  { path: routes.orders, name: "orders", element: <OrderList /> },
+  { path: routes.orders_form, name: "orders_form", element: <OrderForm /> },
   {
-    id: 7,
-    path: routes.orders,
-    name: "orders",
-    element: <OrderList />,
-    route: Route,
-  },
-  {
-    id: 8,
-    path: routes.orders_form,
-    name: "orders_form",
-    element: <OrderForm />,
-    route: Route,
-  },
-  {
-    id: 9,
     path: routes.orders_category,
     name: "orders_category",
     element: <OrderList />,
-    route: Route,
   },
-
-  {
-    id: 10,
-    path: routes.sales,
-    name: "sales",
-    element: <SalesList />,
-    route: Route,
-  },
+  { path: routes.sales, name: "sales", element: <SalesList /> },
 ];
+
+export const authRoute = routesArray.map((route, index) => ({
+  id: index + 1, // Dynamic ID based on index
+  path: route.path,
+  name: route.name,
+  element: route.element,
+  route: Route,
+}));

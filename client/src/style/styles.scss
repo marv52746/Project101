@@ -1,10 +1,11 @@
-// Import other SCSS files
-@import "./form";
-@import "./table";
-@import "./header";
-@import "./modal";
-@import "./sidebar";
-@import "./theme"; // Import theme variables
+@use "sass:color";
+@use "./form" as *; // Importing without a namespace
+@use "./table" as *;
+@use "./header" as *;
+@use "./modal" as *;
+@use "./sidebar" as *;
+@use "./theme" as *;
+@use "./dashboard" as *;
 
 // Global styles can be added here as needed
 body {
@@ -22,7 +23,7 @@ body {
   padding: $padding;
 
   &:hover {
-    background-color: darken($primary-color, 10%); // Adjust for hover
+    background-color: color.scale($primary-color, $lightness: -13%);
   }
 }
 
@@ -34,7 +35,7 @@ body {
   .btn {
     background-color: $dark-primary-color; // Dark theme button color
     &:hover {
-      background-color: darken($dark-primary-color, 10%); // Darken on hover
+      background-color: color.scale($dark-primary-color, $lightness: -13%);
     }
   }
 
@@ -45,19 +46,20 @@ body {
   color: black;
 
   .btn {
-    background-color: $light-secondary-color; // Dark theme button color
+    background-color: $light-secondary-color; // Light theme button color
     color: #000;
 
     &:hover {
-      background-color: darken($light-secondary-color, 10%); // Darken on hover
+      background-color: color.scale($light-secondary-color, $lightness: -13%);
     }
   }
+
   .btn-danger {
     background-color: #dc3545; /* Bootstrap danger color */
     color: white;
 
     &:hover {
-      background-color: darken(#dc3545, 10%); // Darken on hover
+      background-color: color.scale(#dc3545, $lightness: -13%);
     }
   }
 }
