@@ -49,7 +49,7 @@ function OrderList() {
           columns={columns}
           initialData={filteredItems} // Use transformed data directly
           title="Orders"
-          // showNewButton={false}
+          showNewButton={false}
         />
       )}
     </div>

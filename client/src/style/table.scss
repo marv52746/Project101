@@ -1,16 +1,20 @@
 @use "./theme" as *; // Import theme variables
+@use "./mixins" as *; // Import mixins with a namespace
 
 .table-container {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   padding: 1rem;
-  height: 86vh;
+  height: calc(100vh - 30px);
+  border-collapse: collapse;
+  padding-bottom: 0;
+
+  @include slim-scrollbar; // Apply the slim scrollbar styles
 
   .table-wrapper {
     flex-grow: 1; // Allow the wrapper to take remaining space
     overflow-y: auto; // Enable scrolling for overflowing content
-    max-height: calc(86vh - 100px); // Adjust height based on your header size
     position: relative; // Necessary for absolute positioning of the table header
   }
 
@@ -28,6 +32,28 @@
 
   .table-title {
     color: black;
+  }
+  .pagination {
+    margin: 0;
+  }
+
+  .pagination button {
+    margin: 0 0.5rem; /* Spacing between buttons */
+    font-size: 0.875rem; /* Smaller text for pagination buttons */
+  }
+
+  .total-count {
+    font-size: 0.875rem; /* Smaller text for total count */
+  }
+
+  // Style for table cells
+  td,
+  th {
+    text-align: left;
+    padding: 0.5rem; // Add padding to cells
+    overflow: hidden; // Prevent overflow
+    text-overflow: ellipsis; // Add ellipsis for overflow text
+    white-space: nowrap; // Prevent text from wrapping
   }
 
   &.light-theme {

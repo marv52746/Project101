@@ -17,7 +17,7 @@ body {
 }
 
 .btn {
-  background-color: $primary-color; // Default to light theme primary color
+  // background-color: $primary-color; // Default to light theme primary color
   border: none;
   border-radius: $border-radius;
   padding: $padding;
@@ -45,8 +45,17 @@ body {
 .light-theme {
   color: black;
 
+  .new-btn {
+    border: 2px solid green !important;
+    color: green !important;
+    &:hover {
+      background-color: color.scale(green, $lightness: -13%) !important;
+      color: white !important;
+    }
+  }
+
   .btn {
-    background-color: $light-secondary-color; // Light theme button color
+    border-color: $light-secondary-color; // Light theme button color
     color: #000;
 
     &:hover {

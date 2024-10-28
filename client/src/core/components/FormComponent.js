@@ -89,13 +89,13 @@ const FormComponent = ({
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">
+      <h4 className="mb-4">
         {view === "view"
           ? "View Item"
           : view === "edit"
           ? "Edit Item"
           : "New Item"}
-      </h2>
+      </h4>
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
           {columns.map(({ name, label, type, options, required }) => (

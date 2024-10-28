@@ -4,9 +4,12 @@
 
 .sidebar {
   // width: 300px; // Uncomment if needed
-  height: 100vh;
+  // height: 100vh;
   padding: 1rem;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 
   @include slim-scrollbar; // Apply the slim scrollbar styles
 
@@ -19,6 +22,24 @@
   .logo {
     height: 50px;
     margin-right: 15px;
+  }
+
+  .sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid #e9ecef; /* Subtle border on top */
+    margin-top: auto;
+    padding-bottom: 0;
+  }
+
+  .footer-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    // color: #333; /* Text color */
+  }
+  .link {
+    text-decoration: none;
+    color: $light-text-color;
   }
 
   &.dark-theme {
@@ -36,6 +57,11 @@
         background-color: $dark-primary-color !important;
       }
     }
+    .footer-item {
+      &:hover {
+        background-color: color.scale($dark-background-color, $lightness: -13%);
+      }
+    }
   }
 
   &.light-theme {
@@ -51,6 +77,11 @@
 
       &.active-link {
         color: $light-background-color;
+      }
+    }
+    .footer-item {
+      &:hover {
+        color: color.scale($light-background-color, $lightness: 13%);
       }
     }
   }

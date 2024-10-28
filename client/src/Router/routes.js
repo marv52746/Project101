@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import Header from "../InitialPage/header";
+// import Header from "../InitialPage/header";
 import { authRoute, publicRoutes } from "./router.link";
 import Signin from "../InitialPage/signin";
 import { useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const AllRoutes = () => {
           className="col-md-10"
           style={{ padding: 0, display: "flex", flexDirection: "column" }}
         >
-          <Header />
+          {/* <Header /> */}
           <div style={{ flex: 1, overflowY: "auto" }}>
             <Routes>
               {publicRoutes.map((route) => (
