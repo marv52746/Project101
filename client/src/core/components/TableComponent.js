@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ConfirmationModal from "./ConfirmationModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPenToSquare,
+  faEye,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TableComponent = ({
   path = "",
@@ -92,14 +98,14 @@ const TableComponent = ({
           )}
         </div>
         <div className="table-wrapper">
-          <table className="table table-striped table-bordered">
+          <table className="table table-sm table-bordered table-hover">
             <thead className="table-head">
               <tr>
                 <th style={{ width: "50px" }}>#</th>
                 {columns.map((col) => (
                   <th key={col.key}>{col.header}</th>
                 ))}
-                {actions && <th style={{ width: "150px" }}>Action</th>}
+                {actions && <th style={{ width: "150px" }}>Options</th>}
               </tr>
             </thead>
             <tbody>
@@ -123,15 +129,15 @@ const TableComponent = ({
                       <td>
                         {showView && (
                           <Link to={`/${path}/form?id=${item._id}&view=view`}>
-                            <button className="btn btn-info btn-sm me-1">
-                              View
+                            <button className="btn btn-secondary btn-sm me-1">
+                              <FontAwesomeIcon icon={faEye} />
                             </button>
                           </Link>
                         )}
                         {showEdit && (
                           <Link to={`/${path}/form?id=${item._id}&view=edit`}>
-                            <button className="btn btn-warning btn-sm me-1">
-                              Edit
+                            <button className="btn btn-success btn-sm me-1">
+                              <FontAwesomeIcon icon={faPenToSquare} />
                             </button>
                           </Link>
                         )}
@@ -142,7 +148,7 @@ const TableComponent = ({
                               openConfirmationModal(startIndex + index)
                             }
                           >
-                            Delete
+                            <FontAwesomeIcon icon={faTrash} />
                           </button>
                         )}
                       </td>

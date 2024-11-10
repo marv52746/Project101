@@ -85,7 +85,7 @@ const Sidebar = () => {
     <nav className={`sidebar ${themeName}`}>
       <Link to="/" className="logo-link">
         <img
-          src="assets/img/logo-white.png"
+          src={process.env.PUBLIC_URL + "/assets/img/logo.png"}
           alt="Brand Logo"
           className="logo"
         />
@@ -98,13 +98,19 @@ const Sidebar = () => {
                 <button
                   className="nav-link"
                   onClick={() => toggleSection(item.name.toLowerCase())}
-                  style={{ display: "flex", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <FontAwesomeIcon
-                    icon={item.icon}
-                    style={{ marginRight: "10px" }}
-                  />
-                  {item.name}
+                  <div>
+                    <FontAwesomeIcon
+                      icon={item.icon}
+                      style={{ marginRight: "10px" }}
+                    />
+                    {item.name}
+                  </div>
                   <FontAwesomeIcon
                     icon={
                       openSections[item.name.toLowerCase()]

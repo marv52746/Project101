@@ -17,13 +17,13 @@ const AllRoutes = () => {
       className="container-fluid"
       style={{ padding: 0, height: "100vh", overflow: "hidden" }}
     >
-      <div className="row" style={{ height: "100%" }}>
-        <div className="col-md-2" style={{ padding: 0, overflowY: "auto" }}>
+      <div className="row g-0" style={{ height: "100%" }}>
+        <div className="col-md-2 col-lg-2" style={{ overflowY: "auto" }}>
           <Sidebar />
         </div>
         <div
-          className="col-md-10"
-          style={{ padding: 0, display: "flex", flexDirection: "column" }}
+          className="col-md-10 col-lg-10"
+          style={{ display: "flex", flexDirection: "column" }}
         >
           {/* <Header /> */}
           <div style={{ flex: 1, overflowY: "auto" }}>

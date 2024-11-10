@@ -56,7 +56,7 @@ body {
 
   .btn {
     border-color: $light-secondary-color; // Light theme button color
-    color: #000;
+    // color: #000;
 
     &:hover {
       background-color: color.scale($light-secondary-color, $lightness: -13%);

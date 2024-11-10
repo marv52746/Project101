@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ConfirmationModal from "./ConfirmationModal";
 import ReferenceInput from "./ReferenceInput";
@@ -89,13 +89,20 @@ const FormComponent = ({
 
   return (
     <div className="container mt-4">
-      <h4 className="mb-4">
-        {view === "view"
-          ? "View Item"
-          : view === "edit"
-          ? "Edit Item"
-          : "New Item"}
-      </h4>
+      <div className="d-flex justify-content-between">
+        <h4 className="mb-4 ">
+          {view === "view"
+            ? "View Item"
+            : view === "edit"
+            ? "Edit Item"
+            : "New Item"}
+        </h4>
+        {entityName === "orders" && formData["status"] === "pending" && (
+          <Link>
+            <button className="btn btn-sm new-btn">Mark as Complete</button>
+          </Link>
+        )}
+      </div>
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
           {columns.map(({ name, label, type, options, required }) => (

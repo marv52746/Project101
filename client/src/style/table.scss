@@ -47,22 +47,29 @@
   }
 
   // Style for table cells
-  td,
-  th {
+  td {
     text-align: left;
-    padding: 0.5rem; // Add padding to cells
+    padding: 0 0.5rem; // Add padding to cells
     overflow: hidden; // Prevent overflow
     text-overflow: ellipsis; // Add ellipsis for overflow text
     white-space: nowrap; // Prevent text from wrapping
+  }
+  th {
+    text-align: left;
+    padding: 0 0.5rem; // Add padding to cells
+    overflow: hidden; // Prevent overflow
+    text-overflow: ellipsis; // Add ellipsis for overflow text
+    white-space: nowrap; // Prevent text from wrapping
+    background-color: #f7f7f7;
   }
 
   &.light-theme {
     background-color: white;
 
-    .table-head {
-      th {
-        background-color: $light-secondary-color; // Use variable from theme
-      }
-    }
+    // .table-head {
+    //   th {
+    //     background-color: $light-secondary-color; // Use variable from theme
+    //   }
+    // }
   }
 }
