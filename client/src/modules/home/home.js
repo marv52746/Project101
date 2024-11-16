@@ -290,8 +290,8 @@ const Home = () => {
                     <tbody>
                       <tr>
                         <td>1</td>
-                        <td class="productimgname">
-                          <a class="product-img" href="/product-list">
+                        <td className="productimgname">
+                          <a className="product-img" href="/product-list">
                             <img
                               src="/assets/img/products/stock-img-01.png"
                               alt=""
@@ -303,8 +303,8 @@ const Home = () => {
                       </tr>
                       <tr>
                         <td>2</td>
-                        <td class="productimgname">
-                          <a class="product-img" href="/product-list">
+                        <td className="productimgname">
+                          <a className="product-img" href="/product-list">
                             <img
                               src="/assets/img/products/stock-img-06.png"
                               alt="product"
