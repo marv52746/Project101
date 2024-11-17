@@ -30,7 +30,7 @@
     "web-vitals": "^3.4.0"
   },
   "scripts": {
-    "start": "npm-run-all --parallel server client",
+    "start": "npm run server",
     "build": "npm i",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
